@@ -1,4 +1,4 @@
-var book = require('./models/book');
+var book = require('../models/book');
 
 exports.index = (req, res) => {
 

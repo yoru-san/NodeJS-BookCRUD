@@ -1,16 +1,11 @@
 var express = require('express');
-var routes = require('./route.js');
+var routes = require('./routers/routes');
 
 var app = express();
 
-var Users = require('./dao/users')
+var Users = require('./models/users')
 
 app.set('view engine', 'ejs');
-
-
-app.use(express.static(__dirname + '/backoffice/public'));
-app.set('views', __dirname + '/backoffice/views');
-
 
 var passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;

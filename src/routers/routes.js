@@ -1,5 +1,5 @@
-var books_controller = require('./controllers/book_controller');
-var client_controller = require('./controllers/client_controller');
+var books_controller = require('../controllers/book_controller');
+var client_controller = require('../controllers/client_controller');
 
 
 exports.init = (app) => {
