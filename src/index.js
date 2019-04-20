@@ -1,4 +1,5 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var routes = require('./routers/routes');
 
 var app = express();
@@ -6,6 +7,9 @@ var app = express();
 var Users = require('./models/users')
 
 app.set('view engine', 'ejs');
+
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({extended: true})); 
 
 var passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
