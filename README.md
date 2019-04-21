@@ -21,15 +21,15 @@ POST */login* : connexion de l'utilisateur
 GET */logout* : déconnexion de l'utilisateur
 
 ## Endpoints des livres
-GET */* : récupération de la totalité des livres
+GET */books* : récupération de la totalité des livres
 
-GET */:id* : récupération d'un livre spécifique 
+GET */books/:id* : récupération d'un livre spécifique 
 
-POST */* : ajout d'un livre avec le contenu du body
+POST */books* : ajout d'un livre avec le contenu du body
 
-PUT */:id* : mise à jour d'un livre avec le contenu du body
+PUT */books/:id* : mise à jour d'un livre avec le contenu du body
 
-DELETE */:id* : suppression d'un livre (possiblement seulement si l'utilisateur est authentifié)
+DELETE */books/:id* : suppression d'un livre (possiblement seulement si l'utilisateur est authentifié)
 
 ## Autres Endpoints
 GET *random url* : erreur 404
