@@ -1,7 +1,6 @@
 var books_controller = require('../controllers/book_controller');
 var client_controller = require('../controllers/client_controller');
 
-
 exports.init = (app) => {
 
     app.get('/api/login', (req, res) => {
@@ -28,11 +27,14 @@ exports.init = (app) => {
         books_controller.update(req, res);
     });
 
-    app.delete('/api/books/:id', (req, res) => {
+    app.delete('/api/books', (req, res, next) => {
+        if (req.user) return next();
+        return res.status(401).end();
+    }, (req, res) => {
         books_controller.delete(req, res);
     });
 
-    app.get('*', function(_, res){
+    app.get('*', function(_, res) {
         res.status(404).send('Route not found');
-      });
+    });
 }
