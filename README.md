@@ -10,6 +10,8 @@ TP réalisé par Céline BERTAUD & Fabio CORNEAU.
 
 *npm run lint* : permet de lancer l'analyse statique de code
 
+*npm run dev* : permet de lancer l'outil de live reload
+
 *npm run build* et *node dist/bundle.js* : permet de générer un bundle de l'application  
 
 # API
