@@ -1,4 +1,18 @@
-# Documentation de l'API
+# Documentation
+
+TP réalisé par Céline BERTAUD & Fabio CORNEAU.
+
+## Scripts
+
+*npm install* : permet d'installer les modules nécessaires au bon fonctionnement de l'application
+
+*npm run start* : permet de lancer l'application
+
+*npm run lint* : permet de lancer l'analyse statique de code
+
+*npm run build* et *node dist/bundle.js* : permet de générer un bundle de l'application  
+
+#API
 
 ## Endpoints de l'authentification
 
