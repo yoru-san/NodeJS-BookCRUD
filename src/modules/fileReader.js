@@ -1,7 +1,20 @@
 const readFilePromise = require('fs-readfile-promise');
 const writeFilePromise = require('fs-writefile-promise');
 
-exports.findAllExistingBooks = async () =>  {
+global.inMemory_books = [];
+
+exports.initModule = async () => {
+    var books = await findAllExistingBooksFromDisk();
+    global.inMemory_books = books;
+}
+
+exports.findAllExistingBooks = () => {
+    return new Promise((resolve, reject) => {
+        resolve(global.inMemory_books);
+    });
+}
+
+findAllExistingBooksFromDisk = async () => {
     const jsonString = await readFilePromise('data/books.json', 'utf-8');
     try {
         return JSON.parse(jsonString);
@@ -19,7 +32,7 @@ exports.writeBackAllBooks = (books_array) => {
     });
 }
 
-exports.findAllExistingUsers = async () =>  {
+exports.findAllExistingUsers = async () => {
     const jsonString = await readFilePromise('data/users.json', 'utf-8');
     try {
         return JSON.parse(jsonString);
