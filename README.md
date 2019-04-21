@@ -12,7 +12,7 @@ TP réalisé par Céline BERTAUD & Fabio CORNEAU.
 
 *npm run build* et *node dist/bundle.js* : permet de générer un bundle de l'application  
 
-#API
+# API
 
 ## Endpoints de l'authentification
 
