@@ -1,4 +1,3 @@
-const fs = require('fs');
 const readFilePromise = require('fs-readfile-promise');
 const writeFilePromise = require('fs-writefile-promise');
 

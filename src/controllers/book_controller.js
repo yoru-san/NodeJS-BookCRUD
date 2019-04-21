@@ -3,9 +3,10 @@ const fileReader = require('../modules/fileReader');
 
 exports.index = (_, res) => {
     fileReader.findAllExistingBooks().then((books) => {
-        res.json(books);
+        res.status(200).send(books);
     }).catch((err) => {
-        res.json("Error : Books not found -> " + err);
+        let error = "Error : Books not found -> " + err;
+        res.status(400).send(error);
     });
 }
 
@@ -14,13 +15,15 @@ exports.show = (req, res) => {
         let id = +req.params.id;
         const book = books.find(x => x.id === id);
         if (book == undefined) {
-            res.json("Error: book not found");
+            let error = "Error : Book not found";
+            res.status(400).send(error);
         } else {
-            res.json(book);
+            res.status(200).send(book);
         }
     }).catch((err) => {
-        res.json("Error: Books not found -> " + err);
-    })
+        let error = "Error : Books not found -> " + err;
+        res.status(400).send(error);
+    });
 }
 
 exports.create = (req, res) => {
@@ -33,11 +36,11 @@ exports.create = (req, res) => {
 
         fileReader.writeBackAllBooks(books).then((mess) => {
             mess = mess + ", id : " + book.id;
-            res.json(mess);
+            res.status(200).send(mess);
         });
     }).catch((err) => {
-        console.log("Error reading file from disk:", err)
-        return
+        let error = "Error reading file from disk: " + err;
+        res.status(500).send(error);
     });
 }
 
@@ -52,11 +55,12 @@ exports.update = (req, res) => {
         books.push(new_book);
 
         fileReader.writeBackAllBooks(books).then((mess) => {
-            res.json(mess);
+            res.status(200).send(mess);
         });
     }).catch((err) => {
-        res.json("Error updating book : " + err);
-    })
+        let error = "Error updating book : " + err;
+        res.status(500).send(error);
+    });
 };
 
 exports.delete = (req, res) => {
@@ -66,9 +70,10 @@ exports.delete = (req, res) => {
         books.splice(index, 1);
 
         fileReader.writeBackAllBooks(books).then((mess) => {
-            res.json(mess);
+            res.status(200).send(mess);
         });
     }).catch((err) => {
-        res.json("Error deleting book : " + err);
+        let error = "Error deleting book : " + err;
+        res.status(500).send(error);
     });
 }
