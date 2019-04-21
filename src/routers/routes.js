@@ -28,7 +28,10 @@ exports.init = (app) => {
         books_controller.update(req, res);
     });
 
-    app.delete('/api/books', (req, res) => {
+    app.delete('/api/books', (req, res, next) => {
+        if (req.user) return next();
+        return res.status(401).end();
+    }, (req, res) => {
         books_controller.delete(req, res);
     });
 }
