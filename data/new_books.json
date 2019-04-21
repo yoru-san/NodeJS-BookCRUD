@@ -1,11 +1,19 @@
 [
     {
         "id": 1,
-        "title": "Les Misérables",
         "author": "Victor Hugo",
+        "title": "Les Misérables",
         "summary": "C'est Jean Valjean, ce rude gaillard qui peut, d'un coup de reins, soulever une charrette embourbée, cet acrobate aux évasions spectaculaires, cet ancien forçat qui est peut-être un saint... C'est Gavroche, le petit Parisien gouailleur. Ce sont Cosette, la fillette martyre, Javert, le policier inflexible, des malheureux et des coquins : les Misérables...",
         "type": "Littérature francaise",
         "publication_date": "1862"
+    },
+    {
+        "id": 2,
+        "author": "Antoine de Saint Exupéy",
+        "title": "Le petit Prince",
+        "summary": "Une rencontre entre un homme, le narrateur, qui n’a plus le sentiment d’appartenir au monde de ses semblables, et ce petit prince qui habite seul sur sa planète, aime les couchers de soleil et n’oublie jamais une question une fois qu’il l’a posée… Conte philosophique, critique de la société, expression d’une solitude, le Petit Prince est d’abord un livre pour les enfants. Il leur ouvre des horizons, loin du conformisme des adultes.",
+        "type": "Philosophie",
+        "publication_date": "avril 1943"
     },
     {
         "id": 5,

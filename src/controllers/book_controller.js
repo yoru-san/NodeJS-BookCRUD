@@ -1,9 +1,40 @@
 var Book = require('../models/book');
 const fs = require('fs');
 const readFilePromise = require('fs-readfile-promise');
+const writeFilePromise = require('fs-writefile-promise');
 
 
 var inMemory_books = [];
+
+function findAllExistingBooks() {
+    return readFilePromise('data/books.json', 'utf-8').then((jsonString) => {
+        try {
+            console.log(jsonString);
+            var old_books = JSON.parse(jsonString)
+            old_books.forEach(b => {
+                inMemory_books.push(new Book(b.id, b.title, b.author, b.summary, b.type, b.publication_date));
+            });
+        } catch (err) {
+            console.log('Error parsing JSON string:', err)
+        }
+    });
+}
+
+function writeBackAllBooks(books_array) {
+
+    var json_books = [];
+    for (let i = 0; i < books_array.length; i++) {
+        json_books.push(JSON.stringify(books_array[i]));
+    }
+    var data = json_books.join(',');
+    data = "[" + data + "]";
+
+    return writeFilePromise('data/books.json', data).then((file) => {
+        return 'Successfully wrote file' + file;
+    }).catch((err) => {
+        return "Error writing file: " + err;
+    });
+}
 
 exports.index = (_, res) => {
     fs.readFile('data/books.json', 'utf8', (err, jsonString) => {
@@ -23,21 +54,20 @@ exports.index = (_, res) => {
 
 }
 exports.show = (req, res) => {
-    var id = req.params;
-    console.log(id);
-    var book = inMemory_books.find(x => x.id === id);
-    res.json(book);
+    findAllExistingBooks().then(() => {
+        var id = +req.params.id;
+        console.log("id");
+        console.log(id);
+        console.log(inMemory_books);
+        var book = inMemory_books.find(x => x.id === id);
+        console.log("book");
+        console.log(book);
+        res.json(book);
+    })
 }
 
 exports.create = (req, res) => {
-
-    readFilePromise('data/books.json', 'utf-8').then((jsonString) => {
-        try {
-            return JSON.parse(jsonString)
-        } catch (err) {
-            console.log('Error parsing JSON string:', err)
-        }
-    }).then((old_book) => {
+    findAllExistingBooks().then(() => {
         var book = new Book();
         const book_data = req.body;
         book.id = book_data.id;
@@ -47,7 +77,7 @@ exports.create = (req, res) => {
         book.type = book_data.type;
         book.publication_date = book_data.publication_date;
 
-        inMemory_books.push(old_book, book);
+        inMemory_books.push(book);
 
         var json_books = [];
         for (let i = 0; i < inMemory_books.length; i++) {
@@ -81,12 +111,20 @@ exports.update = (req, res) => {
             return
         }
 
-        fs.writeFile('data/new_books.json', JSON.stringify(customer), (err) => {
-            if (err) console.log('Error writing file:', err)
-        })
+        writeBackAllBooks(inMemory_books).then((mess) => {
+            res.json(mess);
+        });
     })
 }
 
 exports.delete = (req, res) => {
-
+    findAllExistingBooks().then(() => {
+        var id = +req.params.id;
+        const index = inMemory_books.findIndex(x => x.id == id);
+        inMemory_books.splice(index, 1);
+    }).then(() => {
+        writeBackAllBooks(inMemory_books).then((mess) => {
+            res.json(mess);
+        });
+    });
 }

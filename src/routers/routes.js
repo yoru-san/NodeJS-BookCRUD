@@ -28,7 +28,7 @@ exports.init = (app) => {
         books_controller.update(req, res);
     });
 
-    app.delete('/api/books', (req, res) => {
+    app.delete('/api/book/:id', (req, res) => {
         books_controller.delete(req, res);
     });
 }
