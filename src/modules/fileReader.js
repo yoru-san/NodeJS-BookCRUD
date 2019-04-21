@@ -7,7 +7,6 @@ exports.findAllExistingBooks = async () =>  {
         return JSON.parse(jsonString);
     }
     catch (err) {
-        console.log(err);
         return err;
     }
 }
@@ -26,7 +25,6 @@ exports.findAllExistingUsers = async () =>  {
         return JSON.parse(jsonString);
     }
     catch (err) {
-        console.log(err);
         return err;
     }
 }

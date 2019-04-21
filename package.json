@@ -7,7 +7,7 @@
     "start": "node ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "TODO",
-    "lint": "TODO"
+    "lint": "./node_modules/.bin/eslint src/"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +24,7 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
+    "eslint": "^5.16.0",
     "nodemon": "^1.18.11",
     "webpack": "^4.30.0",
     "webpack-command": "^0.4.2"
