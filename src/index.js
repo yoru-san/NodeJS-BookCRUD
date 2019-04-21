@@ -11,6 +11,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 
+routes.init(app);
+
+
 app.use(session({
   secret: 'TP1',
   resave: true,

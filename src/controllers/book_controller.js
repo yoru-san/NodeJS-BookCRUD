@@ -3,8 +3,7 @@ const fileReader = require('../modules/fileReader');
 
 exports.index = (_, res) => {
     fileReader.findAllExistingBooks().then((books) => {
-        console.log(books);
-        res.json("Error" + books);
+        res.json(books);
     }).catch((err) => {
         res.json("Error : Books not found -> " + err);
     });
