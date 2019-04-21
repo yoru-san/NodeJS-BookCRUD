@@ -16,7 +16,7 @@ exports.init = (app) => {
         books_controller.index(req, res);
     });
 
-    app.get('/api/book/:id', (req, res) => {
+    app.get('/api/books/:id', (req, res) => {
         books_controller.show(req, res);
     });
 
@@ -24,11 +24,15 @@ exports.init = (app) => {
         books_controller.create(req, res);
     });
 
-    app.patch('/api/book/:id', (req, res) => {
+    app.patch('/api/books/:id', (req, res) => {
         books_controller.update(req, res);
     });
 
-    app.delete('/api/book/:id', (req, res) => {
+    app.delete('/api/books/:id', (req, res) => {
         books_controller.delete(req, res);
     });
+
+    app.get('*', function(_, res){
+        res.status(404).send('Route not found');
+      });
 }
