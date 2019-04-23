@@ -8,6 +8,7 @@ const app = express();
 const UserController = require('./controllers/user_controller');
 const fileReader = require('./modules/fileReader');
 
+require("./common/database.config");
 
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({extended: true}));
