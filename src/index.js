@@ -7,6 +7,7 @@ const auth = require('./modules/auth');
 const app = express();
 const UserController = require('./controllers/user_controller');
 const fileReader = require('./modules/fileReader');
+const mongoose = require('mongoose');
 
 
 app.use(bodyParser.json()); 
@@ -28,6 +29,8 @@ app.use(auth.setUser);
 
 UserController.import();
 
+const url = "mongodb+srv://<root>:<root>@cluster0-v9lpe.mongodb.net/test?retryWrites=true";
+mongoose.connect(url, {useNewUrlParser: true});
 
 const authRouter = require('./routers/auth_router');
 const booksRouter = require('./routers/books_router');
