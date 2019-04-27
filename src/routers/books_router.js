@@ -14,14 +14,14 @@ router.post('/', (req, res) => {
     books_controller.create(req, res);
 });
 
-router.put('/:id', (req, res) => {
+router.put('/', (req, res) => {
     books_controller.update(req, res);
 });
 
 router.delete('/:id', (req, res, next) => {
-    if (req.user) return next();
-    return res.status(401).send('Unauthorized').end();
-}, (req, res) => {
+//     if (req.user) return next();
+//     return res.status(401).send('Unauthorized').end();
+// }, (req, res) => {
     books_controller.delete(req, res);
 });
 

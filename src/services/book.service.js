@@ -1,22 +1,21 @@
-const mongoose = require('mongoose');
 const Book = require('../models/book.model');
 
 exports.addBook = (bookCreated) => {
     return bookCreated.save();
 }
 
-exports.findAllBooks = (id) => {
-    return Book.find(id);
+exports.findAllBooks = () => {
+    return Book.find();
 }
 
 exports.findOneBook = (id) => {
-    return Book.find(id);
+    return Book.findById(id);
 }
 
 exports.updateOneBook = (book) => {
-    return Book.findOneAndUpdate({ _id: book.id }, book, { new: true });
+    return Book.findByIdAndUpdate(book._id, book, { "new": true });
 }
 
 exports.deleteOneBook = (id) => {
-    return Book.deleteOne(id);
+    return Book.findOneAndDelete({ id: id });
 }
