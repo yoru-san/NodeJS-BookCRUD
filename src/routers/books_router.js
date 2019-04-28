@@ -6,8 +6,16 @@ router.get('/', (req, res) => {
     books_controller.index(req, res);
 });
 
+router.get('/title', (req, res) => {
+    books_controller.showByTitle(req, res);
+});
+
 router.get('/:id', (req, res) => {
     books_controller.show(req, res);
+});
+
+router.get('/author/:authorId', (req, res) => {
+    books_controller.showByAuthor(req, res);
 });
 
 router.post('/', (req, res) => {
@@ -19,9 +27,9 @@ router.put('/', (req, res) => {
 });
 
 router.delete('/:id', (req, res, next) => {
-//     if (req.user) return next();
-//     return res.status(401).send('Unauthorized').end();
-// }, (req, res) => {
+    if (req.user) return next();
+    return res.status(401).send('Unauthorized').end();
+}, (req, res) => {
     books_controller.delete(req, res);
 });
 
