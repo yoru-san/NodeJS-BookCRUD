@@ -36,7 +36,7 @@ exports.create = (req, res) => {
 
         fileReader.writeBackAllBooks(books).then((mess) => {
             mess = mess + ", id : " + book.id;
-            res.status(200).send(mess);
+            res.status(201).send(mess);
         });
     }).catch((err) => {
         let error = "Error reading file from disk: " + err;

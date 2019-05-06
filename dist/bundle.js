@@ -92,10 +92,12 @@ const express = __webpack_require__(1);
 const  bodyParser = __webpack_require__(3);
 const cookieParser = __webpack_require__(131);
 const session = __webpack_require__(132);
-var MemoryStore = __webpack_require__(141)(session)
+var MemoryStore = __webpack_require__(141)(session);
 const auth = __webpack_require__(154);
 const app = express();
-const UserController = __webpack_require__(170)
+const UserController = __webpack_require__(170);
+const fileReader = __webpack_require__(171);
+
 
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -116,18 +118,23 @@ app.use(auth.setUser);
 
 UserController.import();
 
+
 const authRouter = __webpack_require__(181);
 const booksRouter = __webpack_require__(182);
 
 app.use('/auth', authRouter);
 app.use('/books', booksRouter);
 
+fileReader.initModule();
+
 app.get('*', function(_, res) {
   res.status(404).send('Requested route not found');
 });
 
+
 var port = process.env.PORT || 8080;
 app.listen(port, () => {
+  // eslint-disable-next-line no-console
     console.log("Server listening on port " + port);
 });
 
@@ -27483,14 +27490,15 @@ const fileImport = __webpack_require__(171).findAllExistingUsers;
 const User = __webpack_require__(180)
 
 let users = [];
-var uniqueId;
+//Use if you want to implement user add from API
+//var uniqueId;
 
 exports.import = () => {
     fileImport().then((importedUsers) => {
         importedUsers.forEach(user => {
             users.push(new User(user.id, user.username, user.password));
         });
-        uniqueId = Math.max.apply(Math, users.map(function(u) { return u.id; })) +1;
+        //uniqueId = Math.max.apply(Math, users.map(function(u) { return u.id; })) +1;
     });  
 }
 
@@ -27509,7 +27517,20 @@ exports.findById = (id) => {
 const readFilePromise = __webpack_require__(172);
 const writeFilePromise = __webpack_require__(179);
 
-exports.findAllExistingBooks = async () =>  {
+global.inMemory_books = [];
+
+exports.initModule = async () => {
+    var books = await findAllExistingBooksFromDisk();
+    global.inMemory_books = books;
+}
+
+exports.findAllExistingBooks = () => {
+    return new Promise((resolve) => {
+        resolve(global.inMemory_books);
+    });
+}
+
+const findAllExistingBooksFromDisk = async () => {
     const jsonString = await readFilePromise('data/books.json', 'utf-8');
     try {
         return JSON.parse(jsonString);
@@ -27527,7 +27548,7 @@ exports.writeBackAllBooks = (books_array) => {
     });
 }
 
-exports.findAllExistingUsers = async () =>  {
+exports.findAllExistingUsers = async () => {
     const jsonString = await readFilePromise('data/users.json', 'utf-8');
     try {
         return JSON.parse(jsonString);

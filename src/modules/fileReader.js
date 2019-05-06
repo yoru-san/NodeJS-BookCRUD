@@ -9,12 +9,12 @@ exports.initModule = async () => {
 }
 
 exports.findAllExistingBooks = () => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         resolve(global.inMemory_books);
     });
 }
 
-findAllExistingBooksFromDisk = async () => {
+const findAllExistingBooksFromDisk = async () => {
     const jsonString = await readFilePromise('data/books.json', 'utf-8');
     try {
         return JSON.parse(jsonString);

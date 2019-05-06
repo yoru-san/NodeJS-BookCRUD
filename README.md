@@ -18,9 +18,9 @@ TP réalisé par Céline BERTAUD & Fabio CORNEAU.
 
 ## Endpoints de l'authentification
 
-POST */login* : connexion de l'utilisateur
+POST *auth/login* : connexion de l'utilisateur
 
-GET */logout* : déconnexion de l'utilisateur
+GET *auth/logout* : déconnexion de l'utilisateur
 
 ## Endpoints des livres
 GET */books* : récupération de la totalité des livres

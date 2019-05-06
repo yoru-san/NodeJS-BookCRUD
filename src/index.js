@@ -41,8 +41,10 @@ app.get('*', function(_, res) {
   res.status(404).send('Requested route not found');
 });
 
+
 var port = process.env.PORT || 8080;
 app.listen(port, () => {
+  // eslint-disable-next-line no-console
     console.log("Server listening on port " + port);
 });
 

@@ -1,18 +1,1 @@
-[
-    {
-        "id": 1,
-        "title": "Le petit Prince",
-        "author": "Antoine de Saint Exupéy",
-        "summary": "Une rencontre entre un homme, le narrateur, qui n’a plus le sentiment d’appartenir au monde de ses semblables, et ce petit prince qui habite seul sur sa planète, aime les couchers de soleil et n’oublie jamais une question une fois qu’il l’a posée… Conte philosophique, critique de la société, expression d’une solitude, le Petit Prince est d’abord un livre pour les enfants. Il leur ouvre des horizons, loin du conformisme des adultes.",
-        "type": "Philosophie",
-        "publication_date": "avril 1943"
-    },
-    {
-        "id": 2,
-        "title": "Roméo et Juliette",
-        "author": "William Shakespeare",
-        "summary": "Leur amour est unique, comme la nuit qui les unit après les serments. Il faut vivre et partir - ou mourir et rester. Cruel dilemme pour Roméo, qui a tué le cousin de Juliette. A peine les amoureux ont-ils touché le paradis qu'ils sont obligés de se séparer. Et s'il ne s'agissait que d'exil ! A Vérone, Capulet et Montague s'affrontent, ensanglantant la ville de leur vendetta. Juliette est Capulet ; Roméo, Montague. Il ne faudra que quatre jours à cet amour pour naître, se consommer, mourir... et se perpétuer.",
-        "type": "Tragédie",
-        "publication_date": "1597"
-    }
-]
+[{"id":2,"title":"Roméo et Juliette","author":"William Shakespeare","summary":"Leur amour est unique, comme la nuit qui les unit après les serments. Il faut vivre et partir - ou mourir et rester. Cruel dilemme pour Roméo, qui a tué le cousin de Juliette. A peine les amoureux ont-ils touché le paradis qu'ils sont obligés de se séparer. Et s'il ne s'agissait que d'exil ! A Vérone, Capulet et Montague s'affrontent, ensanglantant la ville de leur vendetta. Juliette est Capulet ; Roméo, Montague. Il ne faudra que quatre jours à cet amour pour naître, se consommer, mourir... et se perpétuer.","type":"Tragédie","publication_date":"1597"}]
