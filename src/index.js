@@ -31,9 +31,11 @@ UserController.import();
 
 const authRouter = require('./routers/auth_router');
 const booksRouter = require('./routers/books_router');
+const librariesRouter = require('./routers/library_router');
 
 app.use('/auth', authRouter);
 app.use('/books', booksRouter);
+app.use('/libraries', librariesRouter);
 
 fileReader.initModule();
 

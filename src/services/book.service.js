@@ -26,5 +26,5 @@ exports.updateOneBook = (book) => {
 }
 
 exports.deleteOneBook = (id) => {
-    return Book.findOneAndDelete({ id: id });
+    return Book.findOneAndDelete({ _id: id });
 }
