@@ -8,6 +8,7 @@ const app = express();
 const UserController = require('./controllers/user_controller');
 const fileReader = require('./modules/fileReader');
 
+require("./common/database.config");
 
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -27,7 +28,6 @@ app.use(auth.session);
 app.use(auth.setUser);
 
 UserController.import();
-
 
 const authRouter = require('./routers/auth_router');
 const booksRouter = require('./routers/books_router');

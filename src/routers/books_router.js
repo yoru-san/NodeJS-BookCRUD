@@ -6,15 +6,23 @@ router.get('/', (req, res) => {
     books_controller.index(req, res);
 });
 
+router.get('/title', (req, res) => {
+    books_controller.showByTitle(req, res);
+});
+
 router.get('/:id', (req, res) => {
     books_controller.show(req, res);
+});
+
+router.get('/author/:authorId', (req, res) => {
+    books_controller.showByAuthor(req, res);
 });
 
 router.post('/', (req, res) => {
     books_controller.create(req, res);
 });
 
-router.put('/:id', (req, res) => {
+router.put('/', (req, res) => {
     books_controller.update(req, res);
 });
 

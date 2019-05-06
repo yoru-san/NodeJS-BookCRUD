@@ -1,79 +1,63 @@
-const Book = require('../models/book');
-const fileReader = require('../modules/fileReader');
+const Book = require('../models/book.model');
+const Author = require('../models/author.model');
+const service = require('../services/book.service');
 
 exports.index = (_, res) => {
-    fileReader.findAllExistingBooks().then((books) => {
-        res.status(200).send(books);
-    }).catch((err) => {
-        let error = "Error : Books not found -> " + err;
-        res.status(400).send(error);
+    service.findAllBooks().then((books) => {
+        res.json(books);
     });
 }
 
 exports.show = (req, res) => {
-    fileReader.findAllExistingBooks().then((books) => {
-        let id = +req.params.id;
-        const book = books.find(x => x.id === id);
-        if (book == undefined) {
-            let error = "Error : Book not found";
-            res.status(400).send(error);
-        } else {
-            res.status(200).send(book);
-        }
-    }).catch((err) => {
-        let error = "Error : Books not found -> " + err;
-        res.status(400).send(error);
+    service.findOneBook(req.params.id).then((book) => {
+        res.json(book);
+    });
+}
+
+exports.showByTitle = (req, res) => {
+    service.findBooksByTitle(req.query.title).then((book) => {
+        res.json(book);
+    });
+}
+exports.showByAuthor = (req, res) => {
+    service.findBooksByAuthor(req.params.authorId).then((book) => {
+        res.json(book);
     });
 }
 
 exports.create = (req, res) => {
-    fileReader.findAllExistingBooks().then((books) => {
-        let lastid = Math.max.apply(Math, books.map((b) => { return b.id; }))
+    let author = new Author();
+    author.name = req.body.author.name;
+    author.surname = req.body.author.surname;
 
-        const book_data = req.body;
-        const book = new Book(++lastid, book_data.title, book_data.author, book_data.summary, book_data.type, book_data.publication_date);
-        books.push(book);
+    let book = new Book();
+    book.title = req.body.title;
+    book.author = author;
+    book.summary = req.body.summary;
+    book.type = req.body.type;
+    book.publication_date = req.body.publication_date;
 
-        fileReader.writeBackAllBooks(books).then((mess) => {
-            mess = mess + ", id : " + book.id;
-            res.status(201).send(mess);
-        });
-    }).catch((err) => {
-        let error = "Error reading file from disk: " + err;
-        res.status(500).send(error);
+    service.addBook(book).then((bookCreated) => {
+        res.json(bookCreated);
     });
 }
 
 exports.update = (req, res) => {
-    fileReader.findAllExistingBooks().then((books) => {
-        const book_data = req.body;
-        const id = +req.params.id;
-        const new_book = new Book(id, book_data.title, book_data.author, book_data.summary, book_data.type, book_data.publication_date);
+    var book = new Book();
+    book._id = req.body._id;
+    book.title = req.body.title;
+    book.author = req.body.author;
+    book.summary = req.body.summary;
+    book.type = req.body.type;
+    book.publication_date = req.body.publication_date;
 
-        const index = books.findIndex(x => x.id == id);
-        books.splice(index, 1);
-        books.push(new_book);
-
-        fileReader.writeBackAllBooks(books).then((mess) => {
-            res.status(200).send(mess);
-        });
-    }).catch((err) => {
-        let error = "Error updating book : " + err;
-        res.status(500).send(error);
+    service.updateOneBook(book).then((bookUpdated) => {
+        res.json(bookUpdated);
     });
-};
+}
 
 exports.delete = (req, res) => {
-    fileReader.findAllExistingBooks().then((books) => {
-        const id = +req.params.id;
-        const index = books.findIndex(x => x.id == id);
-        books.splice(index, 1);
-
-        fileReader.writeBackAllBooks(books).then((mess) => {
-            res.status(200).send(mess);
-        });
-    }).catch((err) => {
-        let error = "Error deleting book : " + err;
-        res.status(500).send(error);
+    service.deleteOneBook(req.params.id).then(() => {
+        res.json("Book deleted");
     });
 }
