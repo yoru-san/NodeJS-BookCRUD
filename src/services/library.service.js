@@ -21,12 +21,12 @@ exports.deleteOneLibrary = (id) => {
 }
 
 exports.findNearLibrary = (lng, lat) => {
+
+    var point = {type: 'Point', coordinates: [lng, lat]}
+
     return Library.aggregate([{
            $geoNear: {
-             near: {
-               type: 'Point',
-               coordinates: [lng, lat]
-             },
+             near: point,
              spherical: true,
              maxDistance: 2000,
              distanceMultiplier: 1,

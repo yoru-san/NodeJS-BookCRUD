@@ -22,7 +22,7 @@ router.post('/', (req, res) => {
     books_controller.create(req, res);
 });
 
-router.put('/', (req, res) => {
+router.put('/:id', (req, res) => {
     books_controller.update(req, res);
 });
 

@@ -16,5 +16,7 @@ const schema = mongoose.Schema({
     },
 });
 
+schema.index({location: '2dsphere'});
+
 const model = mongoose.model('Library', schema);
 module.exports = model;

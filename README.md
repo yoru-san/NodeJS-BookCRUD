@@ -33,5 +33,18 @@ PUT */books/:id* : mise à jour d'un livre avec le contenu du body
 
 DELETE */books/:id* : suppression d'un livre (possiblement seulement si l'utilisateur est authentifié)
 
+## Endpoints sur les librairies
+GET */libraries* : récupération de la totalité des librairies
+
+GET */libraries/:id* : récupération d'une librairie spécifique 
+
+GET */libraries/findNear/:lng&:lat : récupération de toutes les librairies à moins de 2km (essayer par exemple "/libraries/findNear?lng=43.59008&lat=1.438000")
+
+POST */libraries* : ajout d'une librairie avec le contenu du body
+
+PUT */libraries/:id* : mise à jour d'une librairie avec le contenu du body
+
+DELETE */libraries/:id* : suppression d'une librairie (possiblement seulement si l'utilisateur est authentifié)
+
 ## Autres Endpoints
 GET *random url* : erreur 404

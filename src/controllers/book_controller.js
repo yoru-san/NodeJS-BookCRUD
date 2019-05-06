@@ -44,7 +44,7 @@ exports.create = (req, res) => {
 
 exports.update = (req, res) => {
     var book = new Book();
-    book._id = req.body._id;
+    book._id = req.params.id;
     book.title = req.body.title;
     book.author = req.body.author;
     book.summary = req.body.summary;
